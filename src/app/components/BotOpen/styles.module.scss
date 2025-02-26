@@ -1,0 +1,31 @@
+.openChatContainer {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  bottom: 20px;
+  right: 20px;
+  z-index: 99;
+  max-height: 100px;
+  border-radius: 100px;
+  max-width: 600px;
+  background-color: white;
+  border: 1px solid #aaaaaa;
+  padding: 0;
+
+  .openChatCircle {
+    right: 0;
+    border: 10px solid #583c94;
+    border-radius: 100px;
+    background-color: white;
+    width: 80px;
+    height: 80px;
+  }
+
+  .openChatText {
+    align-self: center;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0 10px;
+    font-size: 22px;
+    max-width: 400px;
+  }
+}
