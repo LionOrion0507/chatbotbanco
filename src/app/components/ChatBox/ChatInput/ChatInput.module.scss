@@ -1,0 +1,20 @@
+.inputComponents {
+  display: flex;
+  gap: 5px;
+
+  input {
+    width: 310px;
+  }
+}
+
+.chatInputButton {
+  height: 30px;
+  width: 30px;
+  background-color: transparent;
+  border: 0;
+
+  img {
+    height: 30px;
+    width: 30px;
+  }
+}

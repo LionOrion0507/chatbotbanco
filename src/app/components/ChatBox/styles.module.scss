@@ -1,0 +1,12 @@
+.chatBoxContainer {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  z-index: 99;
+  width: 400px;
+  height: 400px;
+  background-color: white;
+  border: 5px solid #583c94;
+  border-radius: 20px;
+  padding: 0;
+}

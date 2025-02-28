@@ -1,10 +1,17 @@
+'use client';
 import "./globals.css";
 import { BotOpen } from "./components/BotOpen";
+import { useState } from "react";
+import { ChatBox } from "./components/ChatBox";
 export default function Home() {
+  const [chatBotOpen, setChatBotOpen] = useState(false);
   return (
     <div>
-      <img src="./imagenFondo.png" className="bgImg" />
-      <BotOpen />
+      {chatBotOpen ? (
+        <ChatBox handleClose={setChatBotOpen} />
+      ) : (
+        <BotOpen handleOpen={setChatBotOpen} />
+      )}
     </div>
   );
 }
