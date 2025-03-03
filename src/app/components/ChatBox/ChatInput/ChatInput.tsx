@@ -1,9 +1,12 @@
-import { JSX, useRef } from 'react';
+import { Dispatch, SetStateAction, useRef, useState } from 'react';
 import styles from './ChatInput.module.scss';
 import { Input } from 'react-chat-elements'
 
-export const ChatInput = () => {
-  const hiddenFileInput = useRef<JSX.Element>(null);
+export const ChatInput = (prop: {handleTextInput: Dispatch<SetStateAction<string>>, handleFileInput: Dispatch<SetStateAction<File | undefined>>}) => {
+  const {handleTextInput, handleFileInput} = prop;
+  const hiddenFileInput = useRef<HTMLInputElement>(null);
+  const [value, setValue] = useState('');
+  const [file, setFile] = useState<File>();
 
   const handleClick = () => {
     if (!!hiddenFileInput?.current) {
@@ -13,11 +16,23 @@ export const ChatInput = () => {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const fileUploaded = event.target.files?.[0];
-    console.log('hello there', fileUploaded);
+
+    if (!fileUploaded) return;
+
+    setFile(fileUploaded);
   };
 
   const handleSubmit = () => {
-    console.log('submit');
+    if (!!value) {
+      handleTextInput(value);
+      setValue('');
+    }
+
+    if (!!file) {
+      handleFileInput(file);
+      setFile(undefined);
+    }
+
   };
 
   const fileUpload = (
@@ -25,7 +40,7 @@ export const ChatInput = () => {
       <button onClick={handleClick} className={styles.chatInputButton}>
         <img src='./paperclip.png' />
       </button>
-      <input type='file' style={{ display: "none" }} ref={hiddenFileInput} onChange={handleChange} />
+      <input type='file' style={{ display: "none" }} ref={hiddenFileInput} onChange={handleChange} accept='image/jpeg, image/jpg, .pdf' />
     </>
   );
 
@@ -36,8 +51,18 @@ export const ChatInput = () => {
   );
 
   return (
-    <div>
-      <Input maxHeight={50} leftButtons={fileUpload} rightButtons={sendMessage} className={styles.inputComponents} />
+    <div className={styles.inputContainer}>
+      {!!file && (
+        <div className={styles.filePreview}>
+          <a href={URL.createObjectURL(file)}>
+            {file.name}
+          </a>
+          <button onClick={() => setFile(undefined)} className={styles.closeButton}>
+            <img src="./closeMark.png" alt='close button' />
+          </button>
+        </div>
+      )}
+      <Input maxHeight={50} leftButtons={fileUpload} rightButtons={sendMessage} className={styles.inputComponents} placeholder='Escribe tu mensaje aqui' value={value} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setValue(event.target.value)} onSubmit={handleSubmit}/>
     </div>
   );
 };

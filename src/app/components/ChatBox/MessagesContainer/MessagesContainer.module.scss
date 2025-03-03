@@ -1,3 +1,9 @@
 .messagesContainer {
+  margin: 5px 0;
   height: 320px;
+  overflow-y: scroll;
+}
+
+.loadingDots {
+  margin-left: 10px;
 }

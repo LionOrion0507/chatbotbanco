@@ -14,7 +14,7 @@ export const Header = (prop: { handleClose: Dispatch<SetStateAction<boolean>> })
         {showInfo && (
           <div className={styles.infoPopup}>
             <p>
-              información de privacidad. Tu información es nuestra. La vamos a vender y no puedes hacer nada al respecto
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vulputate sodales egestas. Curabitur rutrum pharetra arcu sit amet tincidunt. Pellentesque eget sem sapien. Nulla sagittis metus in nulla varius blandit. Nulla mattis fermentum rutrum. Cras risus neque, vulputate in feugiat sed, maximus in ex. Nam pulvinar venenatis arcu. Proin laoreet dictum metus, fermentum dignissim erat sollicitudin sed.
             </p>
           </div>
         )}
