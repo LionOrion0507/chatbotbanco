@@ -2,8 +2,12 @@
   margin: 5px 0;
   height: 320px;
   overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
 }
 
 .loadingDots {
   margin-left: 10px;
+  justify-self: flex-end;
 }

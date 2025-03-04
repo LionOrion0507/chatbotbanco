@@ -22,7 +22,7 @@ export const useSendFile = () => {
   return useCallback(async (file: File) => {
     const formData = new FormData();
     formData.append("file", file);
-    const response = await axios.post('http://127.0.0.1:5000/upload-file', formData, {
+    const response = await axios.post('http://127.0.0.1:5000/upload-file-stream', formData, {
       headers: { "Content-Type": "multipart/form-data" },
     });
     const mappedResponse = mapResponse(response.data);
