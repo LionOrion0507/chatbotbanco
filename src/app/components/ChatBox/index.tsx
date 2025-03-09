@@ -19,6 +19,31 @@ export const ChatBox = (prop: { handleClose: Dispatch<SetStateAction<boolean>> }
   const getInitialMessage = useGetInitialMessage();
   const initialMessageReady = useRef(false);
 
+  const typeMessage = (agentMessage: Messages) => {
+    const { message, author } = agentMessage;
+    let index = 0;
+    let currentMessage = '';
+    setIsLoading(false);
+  
+    const interval = setInterval(() => {
+      if (index < message.length) {
+        currentMessage += message[index];
+        setMessagesList(prev => {
+          const updatedMessages = [...prev];
+          if (updatedMessages[updatedMessages.length - 1]?.author === 'Agent') {
+            updatedMessages[updatedMessages.length - 1].message = currentMessage;
+          } else {
+            updatedMessages.push({ message: currentMessage, author: author });
+          }
+          return updatedMessages;
+        });
+        index++;
+      } else {
+        clearInterval(interval);
+      }
+    }, 20); // Speed of typing effect
+  };
+
   useEffect(() => {
     const handleGetInitialMessage = async () => {
       if (!initialMessageReady.current) {
@@ -27,8 +52,7 @@ export const ChatBox = (prop: { handleClose: Dispatch<SetStateAction<boolean>> }
   
         try {
           const initialMessage = await getInitialMessage();
-          setMessagesList((oldMessages) => [...oldMessages, {message: initialMessage.message, author: initialMessage.author}])
-          setIsLoading(false);
+          typeMessage(initialMessage);
         } catch {
           setIsLoading(false);
         }
@@ -48,8 +72,7 @@ export const ChatBox = (prop: { handleClose: Dispatch<SetStateAction<boolean>> }
 
         try {
           const mappedResponse = await sendMessage(userMessage);
-          setMessagesList((oldMessages) => [...oldMessages, {message: mappedResponse.message, author: mappedResponse.author}]);
-          setIsLoading(false);
+          typeMessage(mappedResponse);
         } catch {
           setIsLoading(false);
         }
@@ -68,8 +91,7 @@ export const ChatBox = (prop: { handleClose: Dispatch<SetStateAction<boolean>> }
 
         try {
           const mappedResponse = await sendFile(userFile);
-          setMessagesList((oldMessages) => [...oldMessages, {message: mappedResponse.message, author: mappedResponse.author}]);
-          setIsLoading(false);
+          typeMessage(mappedResponse);
         } catch {
           setIsLoading(false);
         }
@@ -83,7 +105,7 @@ export const ChatBox = (prop: { handleClose: Dispatch<SetStateAction<boolean>> }
     <div className={styles.chatBoxContainer}>
       <Header handleClose={prop.handleClose} />
       <MessagesContainer messagesList={messagesList} hasLoadingMessage={isLoading} />
-      <ChatInput handleTextInput={setUserMessage} handleFileInput={setUserFile} />
+      <ChatInput handleTextInput={setUserMessage} handleFileInput={setUserFile} disabled={isLoading}/>
     </div>
   )
 };

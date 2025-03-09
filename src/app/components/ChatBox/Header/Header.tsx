@@ -14,7 +14,9 @@ export const Header = (prop: { handleClose: Dispatch<SetStateAction<boolean>> })
         {showInfo && (
           <div className={styles.infoPopup}>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vulputate sodales egestas. Curabitur rutrum pharetra arcu sit amet tincidunt. Pellentesque eget sem sapien. Nulla sagittis metus in nulla varius blandit. Nulla mattis fermentum rutrum. Cras risus neque, vulputate in feugiat sed, maximus in ex. Nam pulvinar venenatis arcu. Proin laoreet dictum metus, fermentum dignissim erat sollicitudin sed.
+              {'Toda información que proporcione aquí se mantendrá protegida por BanBajío. Para consultar nuestro aviso de privacidad, de click\n'}
+              <a href=''>aquí</a>
+              .
             </p>
           </div>
         )}

@@ -1,9 +1,8 @@
-import { Dispatch, SetStateAction, useRef, useState } from 'react';
+import { Dispatch, FormEvent, SetStateAction, useRef, useState } from 'react';
 import styles from './ChatInput.module.scss';
-import { Input } from 'react-chat-elements'
 
-export const ChatInput = (prop: {handleTextInput: Dispatch<SetStateAction<string>>, handleFileInput: Dispatch<SetStateAction<File | undefined>>}) => {
-  const {handleTextInput, handleFileInput} = prop;
+export const ChatInput = (prop: {disabled: boolean, handleTextInput: Dispatch<SetStateAction<string>>, handleFileInput: Dispatch<SetStateAction<File | undefined>>}) => {
+  const {handleTextInput, handleFileInput, disabled} = prop;
   const hiddenFileInput = useRef<HTMLInputElement>(null);
   const [value, setValue] = useState('');
   const [file, setFile] = useState<File>();
@@ -22,7 +21,8 @@ export const ChatInput = (prop: {handleTextInput: Dispatch<SetStateAction<string
     setFile(fileUploaded);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     if (!!value) {
       handleTextInput(value);
       setValue('');
@@ -45,7 +45,7 @@ export const ChatInput = (prop: {handleTextInput: Dispatch<SetStateAction<string
   );
 
   const sendMessage = (
-    <button onClick={handleSubmit} className={styles.chatInputButton}>
+    <button disabled={disabled} className={styles.chatInputButton}>
       <img src='./sendMessage.png' />
     </button>
   );
@@ -62,7 +62,13 @@ export const ChatInput = (prop: {handleTextInput: Dispatch<SetStateAction<string
           </button>
         </div>
       )}
-      <Input maxHeight={50} leftButtons={fileUpload} rightButtons={sendMessage} className={styles.inputComponents} placeholder='Escribe tu mensaje aqui' value={value} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setValue(event.target.value)} onSubmit={handleSubmit}/>
+      <div className={styles.inputComponents}>
+        {fileUpload}
+        <form onSubmit={e => handleSubmit(e)}>
+          <input disabled={disabled} placeholder='Escribe tu mensaje aqui' value={value} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setValue(event.target.value)}/>
+          {sendMessage}
+        </form>
+      </div>
     </div>
   );
 };

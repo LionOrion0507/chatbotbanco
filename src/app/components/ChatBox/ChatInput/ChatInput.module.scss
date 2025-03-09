@@ -4,9 +4,16 @@
   .inputComponents {
     display: flex;
     gap: 5px;
+
+    form {
+      display: flex;
+      gap: 5px;
+  
+    }
     
     input {
       width: 310px;
+      height: 25px;
     }
   }
 
