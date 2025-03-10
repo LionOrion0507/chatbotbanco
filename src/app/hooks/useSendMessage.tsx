@@ -2,6 +2,8 @@ import axios from "axios";
 import { useCallback } from "react";
 import { Messages } from "../interface";
 
+const URL = `${process.env.NEXT_PUBLIC_BACKEND_URL}/chat-stream`;
+
 type ChatResponse = {
   message: string,
   data: {
@@ -20,7 +22,7 @@ const mapResponse = (message: ChatResponse): Messages => {
 
 export const useSendMessage = () => {
   return useCallback(async (message: string) => {
-    const response = await axios.post('http://127.0.0.1:5000/chat-stream', {message});
+    const response = await axios.post(URL, {message});
     const mappedResponse = mapResponse(response.data);
     return mappedResponse;
   }, []);

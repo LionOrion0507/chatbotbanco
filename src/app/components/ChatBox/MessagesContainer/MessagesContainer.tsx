@@ -4,7 +4,7 @@ import { Message } from '../Message/Message';
 import { useEffect, useRef } from 'react';
 
 export const MessagesContainer = (props: {messagesList: Messages[], hasLoadingMessage: boolean}) => {
-  const bottomMessagesRef = useRef(null);
+  const bottomMessagesRef = useRef<HTMLDivElement>(null);
   const {messagesList, hasLoadingMessage} = props;
 
   useEffect(() => {

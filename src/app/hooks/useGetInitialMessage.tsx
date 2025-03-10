@@ -2,6 +2,8 @@ import axios from "axios";
 import { useCallback } from "react";
 import { Messages } from "../interface";
 
+const URL = `${process.env.NEXT_PUBLIC_BACKEND_URL}/initial-greeting`;
+
 type ChatGreeting = {
   message: string,
   data: {
@@ -18,8 +20,10 @@ const mapResponse = (message: ChatGreeting): Messages => {
 };
 
 export const useGetInitialMessage = () => {
+  console.log(process.env.NEXT_PUBLIC_BACKEND_URL);
   return useCallback(async () => {
-    const response = await axios.post('http://127.0.0.1:5000/initial-greeting', {stream: false});
+    console.log(URL);
+    const response = await axios.post(URL, {stream: false});
     const mappedResponse = mapResponse(response.data);
     return mappedResponse;
   }, []);
