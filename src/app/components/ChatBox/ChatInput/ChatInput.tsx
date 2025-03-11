@@ -1,5 +1,6 @@
 import { Dispatch, FormEvent, SetStateAction, useRef, useState } from 'react';
 import styles from './ChatInput.module.scss';
+import Image from 'next/image';
 
 export const ChatInput = (prop: {disabled: boolean, handleTextInput: Dispatch<SetStateAction<string>>, handleFileInput: Dispatch<SetStateAction<File | undefined>>}) => {
   const {handleTextInput, handleFileInput, disabled} = prop;
@@ -38,7 +39,7 @@ export const ChatInput = (prop: {disabled: boolean, handleTextInput: Dispatch<Se
   const fileUpload = (
     <>
       <button onClick={handleClick} className={styles.chatInputButton}>
-        <img src='./paperclip.png' />
+        <Image src='/paperclip.png' width={30} height={30} alt='add files'/>
       </button>
       <input type='file' style={{ display: "none" }} ref={hiddenFileInput} onChange={handleChange} accept='image/jpeg, image/jpg, .pdf' />
     </>
@@ -46,7 +47,7 @@ export const ChatInput = (prop: {disabled: boolean, handleTextInput: Dispatch<Se
 
   const sendMessage = (
     <button disabled={disabled} className={styles.chatInputButton}>
-      <img src='./sendMessage.png' />
+      <Image src='/sendMessage.png' width={30} height={30} alt='send message'/>
     </button>
   );
 

@@ -1,4 +1,5 @@
 import "./globals.css";
+import Image from 'next/image';
 
 export default function RootLayout({
   children,
@@ -8,7 +9,7 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className="bodyMargin">
-        <img src="./imagenFondo.png" className="bgImg" alt="background image" />
+        <Image src='/imagenFondo.png' alt="background image" fill />
         {children}
       </body>
     </html>

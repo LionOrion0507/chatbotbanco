@@ -2,9 +2,3 @@
   margin: 0;
   overflow: hidden;
 }
-
-.bgImg {
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
-}

@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction, useState } from 'react';
 import styles from './Header.module.scss';
+import Image from 'next/image';
 
 export const Header = (prop: { handleClose: Dispatch<SetStateAction<boolean>> }) => {
   const { handleClose } = prop;
@@ -7,10 +8,10 @@ export const Header = (prop: { handleClose: Dispatch<SetStateAction<boolean>> })
   return (
     <div className={styles.headerContainer}>
       <button onClick={() => handleClose(false)} className={styles.closeButton}>
-        <img src="./closeMark.png" alt='close button' />
+        <Image src='/closeMark.png' alt='close button' width={20} height={20} />
       </button>
       <div className={styles.moreInfo} onMouseOver={() => setShowInfo(true)} onMouseLeave={() => setShowInfo(false)}>
-        <img src="./infoIcon.png" alt='more information' />
+        <Image src='/infoIcon.png' alt='more information' width={30} height={30} />
         {showInfo && (
           <div className={styles.infoPopup}>
             <p>
