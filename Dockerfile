@@ -10,6 +10,8 @@ COPY package.json yarn.lock ./
 # Install dependencies
 RUN yarn install --frozen-lockfile
 
+ENV NEXT_PUBLIC_BACKEND_URL=https://banbajio-246561174948.us-central1.run.app/
+
 # Copy all files (including your TypeScript source code)
 COPY . .
 
