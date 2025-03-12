@@ -1,6 +1,7 @@
 'use client';
 import { Dispatch, SetStateAction } from 'react';
 import styles from './styles.module.scss';
+import Image from 'next/image';
 
 export const BotOpen = (prop: { handleOpen: Dispatch<SetStateAction<boolean>> }) => {
   const { handleOpen } = prop;
@@ -9,7 +10,9 @@ export const BotOpen = (prop: { handleOpen: Dispatch<SetStateAction<boolean>> })
       <div className={styles.openChatText}>
         Estás buscando aplicar a un crédito? Haz click aquí!
       </div>
-      <div className={styles.openChatCircle} />
+      <div className={styles.openChatCircle}>
+        <Image src='/creditIcon.png' alt='credit icon' width={60} height={60} />
+      </div>
     </button>
   )
 };
